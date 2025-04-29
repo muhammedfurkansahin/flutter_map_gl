@@ -6,6 +6,16 @@ repository: https://github.com/muhammedfurkansahin/flutter_map_gl
 issue_tracker: https://github.com/muhammedfurkansahin/flutter_map_gl/issues
 documentation: https://github.com/muhammedfurkansahin/flutter_map_gl/blob/main/README.md
 
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        default_package: flutter_map_gl
+      ios:
+        default_package: flutter_map_gl
+        
+
 environment:
   sdk: ^3.7.2
   flutter: ">=1.17.0"
@@ -27,7 +37,6 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
-flutter:
 
   # To add assets to your package, add an assets section, like this:
   # assets:

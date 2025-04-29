@@ -1,3 +1,7 @@
+## 0.1.1
+* yaml update
+
+
 ## 0.1.0
 * webviewa geri dönüldü
 
