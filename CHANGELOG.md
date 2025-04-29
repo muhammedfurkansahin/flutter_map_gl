@@ -1,3 +1,6 @@
+## 0.1.0
+* webviewa geri dönüldü
+
 ## 0.0.9
 * iOS platformunda "unregistered_view_type" hatası için düzeltme eklendi
 * `FlutterMapGLPlatform` sınıfı eklendi - iOS platform kayıt sorunları otomatik olarak çözülüyor

@@ -1,7 +1,6 @@
 export 'src/flutter_map_gl_widget.dart';
 export 'src/map_options.dart';
 export 'src/map_controller.dart';
-export 'src/platform_initialization.dart';
 
 /// A Calculator.
 class Calculator {
