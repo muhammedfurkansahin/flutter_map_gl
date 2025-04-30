@@ -1,3 +1,6 @@
+## 0.1.4
+* code formatted
+
 ## 0.1.3
 * bug fix
 

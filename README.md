@@ -29,7 +29,7 @@ Paketi projenize eklemek için `pubspec.yaml` dosyanıza şu satırları ekleyin
 
 ```yaml
 dependencies:
-  flutter_map_gl: ^0.1.0
+  flutter_map_gl: ^0.1.4
   webview_flutter: ^4.11.0
 ```
 

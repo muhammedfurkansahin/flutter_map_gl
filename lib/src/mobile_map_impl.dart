@@ -213,7 +213,6 @@ Widget buildMobileMap(
                 // Eğer followUserHeading aktifse ve kullanıcı yönü değiştiyse
                 if (mapController.followUserHeading) {
                   mapController.bearing = data['heading'];
-                  mapController.notifyListeners();
                 }
               }
             } catch (e) {
