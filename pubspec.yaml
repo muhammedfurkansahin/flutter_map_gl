@@ -1,6 +1,6 @@
 name: flutter_map_gl
 description: "Flutter paketi ile mobil uygulamalarda (iOS ve Android) haritaları kullanmanıza olanak tanıyan bir paket."
-version: 0.1.2
+version: 0.1.3
 homepage: https://github.com/muhammedfurkansahin/flutter_map_gl
 repository: https://github.com/muhammedfurkansahin/flutter_map_gl
 issue_tracker: https://github.com/muhammedfurkansahin/flutter_map_gl/issues

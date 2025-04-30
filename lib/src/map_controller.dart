@@ -33,9 +33,16 @@ class MapController extends ChangeNotifier {
   }
 
   /// Haritayı belirtilen konuma taşır
-  Future<void> moveCamera(LatLng position, {double? zoom, double? tilt, double? bearing}) async {
+  Future<void> moveCamera(
+    LatLng position, {
+    double? zoom,
+    double? tilt,
+    double? bearing,
+  }) async {
     if (kDebugMode) {
-      print('moveCamera: $position, zoom: $zoom, tilt: $tilt, bearing: $bearing');
+      print(
+        'moveCamera: $position, zoom: $zoom, tilt: $tilt, bearing: $bearing',
+      );
     }
     this.position = position;
     if (zoom != null) {

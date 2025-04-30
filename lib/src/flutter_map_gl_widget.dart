@@ -56,7 +56,15 @@ class FlutterMapGL extends StatefulWidget {
          hasTilt: hasTilt,
        );
 
-  const FlutterMapGL({super.key, required this.options, this.controller, this.onMapCreated, this.onMapClick, this.onCameraMove, this.onBearingChange});
+  const FlutterMapGL({
+    super.key,
+    required this.options,
+    this.controller,
+    this.onMapCreated,
+    this.onMapClick,
+    this.onCameraMove,
+    this.onBearingChange,
+  });
 
   @override
   State<FlutterMapGL> createState() => _FlutterMapGLState();
@@ -87,7 +95,9 @@ class _FlutterMapGLState extends State<FlutterMapGL> {
   void _onControllerChanged() {
     setState(() {
       // Harita durumu değiştiğinde widget'ı yeniden çiz
-      if (widget.onCameraMove != null && _controller.position != null && _controller.zoom != null) {
+      if (widget.onCameraMove != null &&
+          _controller.position != null &&
+          _controller.zoom != null) {
         widget.onCameraMove!(_controller.position!, _controller.zoom!);
       }
 
@@ -101,6 +111,12 @@ class _FlutterMapGLState extends State<FlutterMapGL> {
   @override
   Widget build(BuildContext context) {
     // Mobil platformlarda harita görünümü
-    return buildMobileMap(context, _controller, widget.options, widget.onMapCreated, widget.onMapClick);
+    return buildMobileMap(
+      context,
+      _controller,
+      widget.options,
+      widget.onMapCreated,
+      widget.onMapClick,
+    );
   }
 }

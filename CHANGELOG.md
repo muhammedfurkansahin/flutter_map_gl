@@ -1,3 +1,6 @@
+## 0.1.3
+* bug fix
+
 ## 0.1.2
 * Dinamik URL yapısı desteği eklendi - artık #zoom/lat/lng/bearing/tilt gibi parametreler isteğe bağlı
 * Harita URL'sinde parametrelerin sırasını özelleştirme imkanı eklendi

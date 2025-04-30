@@ -29,8 +29,7 @@ class _MapScreenState extends State<MapScreen> {
   final MapController _controller = MapController();
 
   // Klokantech temel harita URL'i ve parametreleri
-  final String _mapUrl =
-      "url";
+  final String _mapUrl = "url";
   late MapOptions _mapOptions;
 
   @override

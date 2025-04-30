@@ -24,7 +24,13 @@ void initMobileMap(MapController controller, MapOptions options) {
 }
 
 /// Mobil harita widget'ını oluşturan fonksiyon - WebView tabanlı
-Widget buildMobileMap(BuildContext context, MapController mapController, MapOptions options, Function()? onMapCreated, Function(LatLng)? onMapClick) {
+Widget buildMobileMap(
+  BuildContext context,
+  MapController mapController,
+  MapOptions options,
+  Function()? onMapCreated,
+  Function(LatLng)? onMapClick,
+) {
   // Güncel harita değerlerini al
   final LatLng position = mapController.position ?? options.center;
   final double zoom = mapController.zoom ?? options.zoom;
@@ -167,7 +173,10 @@ Widget buildMobileMap(BuildContext context, MapController mapController, MapOpti
   // Platforma özel WebViewController parametreleri
   final PlatformWebViewControllerCreationParams params;
   if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-    params = WebKitWebViewControllerCreationParams(allowsInlineMediaPlayback: true, mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{});
+    params = WebKitWebViewControllerCreationParams(
+      allowsInlineMediaPlayback: true,
+      mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
+    );
   } else {
     params = const PlatformWebViewControllerCreationParams();
   }
@@ -216,7 +225,8 @@ Widget buildMobileMap(BuildContext context, MapController mapController, MapOpti
 
   // Android için ek konfigürasyon
   if (controller.platform is AndroidWebViewController) {
-    (controller.platform as AndroidWebViewController).setMediaPlaybackRequiresUserGesture(false);
+    (controller.platform as AndroidWebViewController)
+        .setMediaPlaybackRequiresUserGesture(false);
   }
 
   return WebViewWidget(controller: controller);

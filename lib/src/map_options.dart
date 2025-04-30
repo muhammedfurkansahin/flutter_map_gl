@@ -57,7 +57,14 @@ class MapOptions {
 
   /// URL'den harita seçenekleri oluşturur
   /// Örnek: https://inovision.tech/styles/klokantech-basic/#16.96/37.872351/32.492013/-36.9/60
-  factory MapOptions.fromUrl(String url, {List<String>? parameterOrder, bool hasZoom = false, bool hasLatLng = false, bool hasBearing = false, bool hasTilt = false}) {
+  factory MapOptions.fromUrl(
+    String url, {
+    List<String>? parameterOrder,
+    bool hasZoom = false,
+    bool hasLatLng = false,
+    bool hasBearing = false,
+    bool hasTilt = false,
+  }) {
     // URL'den parametreleri çıkar
     try {
       // URL kısmını ve hash kısmını ayır
@@ -78,12 +85,22 @@ class MapOptions {
       bool foundTilt = false;
 
       // Hash kısmı varsa ve sıralama belirtilmişse parametreleri çıkar
-      if (hashPart.isNotEmpty && parameterOrder != null && parameterOrder.isNotEmpty) {
+      if (hashPart.isNotEmpty &&
+          parameterOrder != null &&
+          parameterOrder.isNotEmpty) {
         final parts = hashPart.split('/');
 
         // Parametre sayısı yetersizse işlemi atla
         if (parts.length < parameterOrder.length) {
-          return MapOptions(center: LatLng(lat, lng), style: baseUrl, parameterOrder: parameterOrder, hasZoom: hasZoom, hasLatLng: hasLatLng, hasBearing: hasBearing, hasTilt: hasTilt);
+          return MapOptions(
+            center: LatLng(lat, lng),
+            style: baseUrl,
+            parameterOrder: parameterOrder,
+            hasZoom: hasZoom,
+            hasLatLng: hasLatLng,
+            hasBearing: hasBearing,
+            hasTilt: hasTilt,
+          );
         }
 
         // Parametreleri sırayla oku
@@ -169,7 +186,15 @@ class MapOptions {
       );
     } catch (e) {
       // Hata durumunda basit bir MapOptions döndür
-      return MapOptions(center: const LatLng(0, 0), style: url, parameterOrder: parameterOrder, hasZoom: hasZoom, hasLatLng: hasLatLng, hasBearing: hasBearing, hasTilt: hasTilt);
+      return MapOptions(
+        center: const LatLng(0, 0),
+        style: url,
+        parameterOrder: parameterOrder,
+        hasZoom: hasZoom,
+        hasLatLng: hasLatLng,
+        hasBearing: hasBearing,
+        hasTilt: hasTilt,
+      );
     }
   }
 
