@@ -1,12 +1,12 @@
 name: flutter_map_gl
-description: "Flutter paketi ile mobil uygulamalarda (iOS ve Android) haritaları kullanmanıza olanak tanıyan bir paket."
-version: 0.1.4
+description: "A Flutter package that allows you to use maps in mobile applications (iOS and Android)."
+version: 1.0.0
 homepage: https://github.com/muhammedfurkansahin/flutter_map_gl
 repository: https://github.com/muhammedfurkansahin/flutter_map_gl
 issue_tracker: https://github.com/muhammedfurkansahin/flutter_map_gl/issues
 documentation: https://github.com/muhammedfurkansahin/flutter_map_gl/blob/main/README.md
 
-# Sadece iOS ve Android platformlarını desteklediğini belirtir
+# Indicates that it only supports iOS and Android platforms
 platforms:
   android: 
   ios:
@@ -18,7 +18,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter: ^4.11.0 # WebView tabanlı harita oluşturmak için
+  webview_flutter: ^4.11.0 # For creating WebView-based maps
   webview_flutter_android: ^4.4.2
   webview_flutter_wkwebview: ^3.20.0
 
@@ -26,7 +26,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  # webview_flutter: ^4.11.0 # Sadece dev_dependencies altında geliştirme için
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

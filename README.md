@@ -13,35 +13,35 @@ and the Flutter guide for
 
 # Flutter Map GL
 
-Flutter Map GL, mobil uygulamalarda (iOS ve Android) var olan web haritalarını WebView ile göstermenize olanak tanıyan bir Flutter paketidir.
+Flutter Map GL is a Flutter package that allows you to display existing web maps in mobile applications (iOS and Android) using WebView.
 
-## Özellikler
+## Features
 
-- Web haritalarını mobil uygulamalarda (iOS ve Android) WebView ile görüntüleme
-- 3D harita desteği (zoom, bearing, pitch/tilt)
-- Harita kontrolcüsü ile harita üzerinde işlemler yapma
-- Harita olaylarını dinleme (tıklama, hareket, vb.)
-- URL tabanlı harita yapılandırması
+- Display web maps in mobile applications (iOS and Android) using WebView
+- Support for 3D maps (zoom, bearing, pitch/tilt)
+- Perform operations on the map with a map controller
+- Listen to map events (click, movement, etc.)
+- URL-based map configuration
 
-## Başlangıç
+## Getting Started
 
-Paketi projenize eklemek için `pubspec.yaml` dosyanıza şu satırları ekleyin:
+To add the package to your project, add the following lines to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_map_gl: ^0.1.4
+  flutter_map_gl: ^1.0.0
   webview_flutter: ^4.11.0
 ```
 
-Daha sonra bağımlılıkları yükleyin:
+Then install the dependencies:
 
 ```bash
 flutter pub get
 ```
 
-## Kullanım
+## Usage
 
-Temel bir harita gösterimi için:
+For basic map display:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -52,25 +52,25 @@ class MapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterMapGL(
       options: MapOptions(
-        center: LatLng(41.0082, 28.9784), // İstanbul
+        center: LatLng(41.0082, 28.9784), // Istanbul
         style: 'https://your-map-server.com/map-style/',
         zoom: 11.0,
-        bearing: 0.0,    // Harita rotasyonu (0-360 derece)
-        pitch: 45.0,     // Harita eğimi (0-60 derece)
+        bearing: 0.0,    // Map rotation (0-360 degrees)
+        pitch: 45.0,     // Map tilt (0-60 degrees)
       ),
     );
   }
 }
 ```
 
-Harita kontrolcüsü ile işlemler yapmak için:
+To perform operations with the map controller:
 
 ```dart
 final MapController controller = MapController();
 
 FlutterMapGL(
   options: MapOptions(
-    center: LatLng(41.0082, 28.9784), // İstanbul
+    center: LatLng(41.0082, 28.9784), // Istanbul
     style: 'https://your-map-server.com/map-style/',
     zoom: 11.0,
     bearing: 0.0,
@@ -78,94 +78,94 @@ FlutterMapGL(
   ),
   controller: controller,
   onMapCreated: () {
-    print('Harita oluşturuldu!');
+    print('Map created!');
   },
   onMapClick: (latLng) {
-    print('Haritada tıklandı: $latLng');
+    print('Map clicked: $latLng');
   },
   onCameraMove: (position, zoom) {
-    print('Kamera hareketi: $position, Zoom: $zoom');
+    print('Camera movement: $position, Zoom: $zoom');
   },
 )
 
-// Haritayı hareket ettirme
+// Move the map
 controller.moveCamera(LatLng(41.01, 28.98), zoom: 15.0);
 
-// Yakınlaştırma seviyesini değiştirme
+// Change zoom level
 controller.setZoom(12.0);
 
-// Harita stilini değiştirme
+// Change map style
 controller.setStyle('https://your-map-server.com/different-style/');
 ```
 
-## WebView ve 3D Harita Entegrasyonu
+## WebView and 3D Map Integration
 
-Bu paket, sunucunuzdaki 3D haritaları WebView içinde göstermek için tasarlanmıştır. Haritanızın JavaScript API'si aşağıdaki özellikleri desteklemelidir:
+This package is designed to display 3D maps from your server within a WebView. Your map's JavaScript API should support the following features:
 
 ```javascript
-// Harita yükleme sonrası event listener'ları ekleyin
+// Add event listeners after map loading
 map.on('click', function(e) {
   const lat = e.lngLat.lat;
   const lng = e.lngLat.lng;
-  // Flutter'a tıklama bilgisini gönder
+  // Send click information to Flutter
   MapChannel.postMessage('click:' + lat + ',' + lng);
 });
 
-// Harita hareketi sonrası bildirim
+// Notification after map movement
 map.on('moveend', function() {
   const center = map.getCenter();
   const zoom = map.getZoom();
-  // Flutter'a kamera hareketi bilgisini gönder
+  // Send camera movement information to Flutter
   MapChannel.postMessage('move:' + center.lat + ',' + center.lng + ',' + zoom);
 });
 
-// Zoom değiştirme metodu
+// Method to change zoom
 map.setZoom(14.5);
 
-// Bearing (pusula) değiştirme
+// Change bearing (compass)
 map.setBearing(45);
 
-// Pitch (eğim) değiştirme
+// Change pitch (tilt)
 map.setPitch(60);
 ```
 
-## URL Tabanlı Harita Yapılandırması
+## URL-Based Map Configuration
 
-Flutter Map GL, URL'den harita parametrelerini çıkarabilir. Bu, harita yapılandırmanızı tek bir URL ile yönetmenizi sağlar:
+Flutter Map GL can extract map parameters from a URL. This allows you to manage your map configuration with a single URL:
 
 ```dart
-// URL formatı: temelUrl#zoom/lat/lng/bearing/tilt
+// URL format: baseUrl#zoom/lat/lng/bearing/tilt
 final String mapUrl = "https://your-map-server.com/styles/main-style/#16.96/37.872351/32.492013/-36.9/60";
 
-// URL'den harita seçeneklerini oluştur
+// Create map options from URL
 final mapOptions = MapOptions.fromUrl(mapUrl);
 
-// Haritayı göster
+// Display the map
 FlutterMapGL(
   options: mapOptions,
   controller: controller,
 )
 ```
 
-## Android Manifest İzinleri
+## Android Manifest Permissions
 
-Android uygulamanızın AndroidManifest.xml dosyasına aşağıdaki izinleri eklediğinizden emin olun:
+Make sure to add the following permissions to your Android application's AndroidManifest.xml file:
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 
-Konum hizmetleri kullanacaksanız, bu izinleri de ekleyin:
+If you will use location services, also add these permissions:
 
 ```xml
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 ```
 
-## iOS Info.plist Tanımları
+## iOS Info.plist Definitions
 
-iOS uygulamanızın Info.plist dosyasına aşağıdaki tanımları eklediğinizden emin olun:
+Make sure to add the following definitions to your iOS application's Info.plist file:
 
 ```xml
 <key>io.flutter.embedded_views_preview</key>
@@ -178,60 +178,60 @@ iOS uygulamanızın Info.plist dosyasına aşağıdaki tanımları eklediğinizd
 </dict>
 ```
 
-Konum hizmetleri kullanacaksanız:
+If you will use location services:
 
 ```xml
 <key>NSLocationWhenInUseUsageDescription</key>
-<string>Harita özelliklerini kullanabilmek için konum izni gerekiyor</string>
+<string>Location permission is required to use map features</string>
 ```
 
-## Platform Desteği
+## Platform Support
 
-| Platform | Durum |
+| Platform | Status |
 | -------- | ----- |
-| Android | ✅ Destekleniyor |
-| iOS | ✅ Destekleniyor |
+| Android | ✅ Supported |
+| iOS | ✅ Supported |
 
-## Performans İpuçları
+## Performance Tips
 
-3D haritalar yüksek performans gerektirdiğinden, aşağıdaki ipuçlarını dikkate alın:
+Since 3D maps require high performance, consider the following tips:
 
-1. WebView yüklenirken bir yükleme göstergesi ekleyin
-2. Cihaz performansına göre harita kalitesini ayarlayın
-3. Büyük haritaları lazy loading ile yükleyin
-4. Haritanın görünür olmadığı durumlarda WebView'i dispose edin
-5. Android ve iOS için ayrı WebView yapılandırmaları kullanın
+1. Add a loading indicator while the WebView is loading
+2. Adjust map quality according to device performance
+3. Load large maps with lazy loading
+4. Dispose of WebView when the map is not visible
+5. Use separate WebView configurations for Android and iOS
 
-## Örnek Kullanım Senaryoları
+## Example Use Cases
 
-- Özel 3D şehir modelleri görüntüleme
-- Oyun benzeri haritalandırma sistemleri
-- Mimari ve arazi görselleştirme
-- Sanal tur ve gezinti uygulamaları
-- Özelleştirilmiş tematik haritalar
+- Displaying custom 3D city models
+- Game-like mapping systems
+- Architectural and terrain visualization
+- Virtual tour and navigation applications
+- Customized thematic maps
 
-## Katkıda Bulunma
+## Contributing
 
-Katkıda bulunmak isterseniz, lütfen bir Pull Request açın veya bir Issue oluşturun.
+If you would like to contribute, please open a Pull Request or create an Issue.
 
-## Lisans
+## License
 
-Bu paket MIT lisansı altında lisanslanmıştır.
+This package is licensed under the MIT license.
 
-## iOS WebView Sorunu Çözümü
+## iOS WebView Issue Solution
 
-iOS platformunda WebView ile ilgili olarak `PlatformException (PlatformException(channel-error, Unable to establish connection on channel...` hatası alıyorsanız, aşağıdaki adımları izleyin:
+If you are experiencing a `PlatformException (PlatformException(channel-error, Unable to establish connection on channel...` error related to WebView on iOS platform, follow these steps:
 
-1. Uygulamanızın pubspec.yaml dosyasında webview_flutter paketini açıkça belirtin:
+1. Explicitly specify the webview_flutter package in your application's pubspec.yaml file:
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  flutter_map_gl: ^0.0.7
-  webview_flutter: ^4.11.0  # Aynı sürümü belirtmek önemli
+  flutter_map_gl: ^1.0.0
+  webview_flutter: ^4.11.0  # Specifying the same version is important
 ```
 
-2. iOS projenizin `ios/Runner/Info.plist` dosyasına aşağıdaki ayarları ekleyin:
+2. Add the following settings to your iOS project's `ios/Runner/Info.plist` file:
 ```xml
 <key>io.flutter.embedded_views_preview</key>
 <true/>
@@ -243,7 +243,7 @@ dependencies:
 </dict>
 ```
 
-3. iOS uygulamanızı yeniden oluşturun:
+3. Rebuild your iOS application:
 ```bash
 flutter clean
 cd ios
@@ -252,30 +252,159 @@ cd ..
 flutter run -d ios
 ```
 
-4. Uygulama yaşam döngüsünü doğru yönetin - Uygulamanız arka plana alındığında WebView'in kapatılıp tekrar açıldığında sorun çıkmaması için state yönetimini düzgün yapın.
+4. Manage the application lifecycle correctly - Properly handle state management to prevent issues when your application is sent to the background and the WebView is closed and reopened.
 
-## URL Tabanlı Harita Kullanımı
+## URL-Based Map Usage
 
-Flutter Map GL artık doğrudan URL'den harita parametrelerini çıkarabilir. Bu, özellikle iOS'taki WebView sorunlarına bir çözüm sunar.
+Flutter Map GL can now extract map parameters directly from a URL. This provides a solution especially for WebView issues on iOS.
 
 ```dart
-// URL formatı: temelUrl#zoom/lat/lng/bearing/tilt
-final String mapUrl = "https://inovision.tech/styles/klokantech-basic/#16.96/37.872351/32.492013/-36.9/60";
+// URL format: baseUrl#zoom/lat/lng/bearing/tilt
+final String mapUrl = "MAP_URL";
 
-// URL'den harita seçeneklerini oluştur
+// Create map options from URL
 final mapOptions = MapOptions.fromUrl(mapUrl);
 
-// Haritayı göster
+// Display the map
 FlutterMapGL(
   options: mapOptions,
   controller: controller,
   onMapCreated: () {
-    print('Harita oluşturuldu!');
+    print('Map created!');
   },
   onMapClick: (latLng) {
-    print('Haritada tıklandı: $latLng');
+    print('Map clicked: $latLng');
   },
 )
 ```
 
-Bu yaklaşım, iOS platformunda yaşanan WebView kanal hatalarını önler ve haritanızı doğrudan belirttiğiniz URL parametreleriyle (zoom, enlem, boylam, bearing, tilt) görüntülemenizi sağlar.
+This approach prevents WebView channel errors on iOS platform and allows you to display your map directly with the URL parameters you specify (zoom, latitude, longitude, bearing, tilt).
+
+## Documentation
+
+### Classes
+
+#### `FlutterMapGL`
+
+The main widget that displays the map.
+
+```dart
+FlutterMapGL({
+  required MapOptions options,
+  MapController? controller,
+  Function? onMapCreated,
+  Function(LatLng)? onMapClick,
+  Function(LatLng, double)? onCameraMove,
+})
+```
+
+#### `MapOptions`
+
+Contains configuration options for the map.
+
+```dart
+MapOptions({
+  required LatLng center,
+  required String style,
+  double zoom = 10.0,
+  double bearing = 0.0,
+  double pitch = 0.0,
+})
+```
+
+Factory method to create options from URL:
+
+```dart
+MapOptions.fromUrl(String url)
+```
+
+#### `MapController`
+
+Controls the map view.
+
+```dart
+// Methods
+void moveCamera(LatLng position, {double? zoom});
+void setZoom(double zoom);
+void setBearing(double bearing);
+void setPitch(double pitch);
+void setStyle(String styleUrl);
+void followUserLocation(bool follow);
+```
+
+#### `LatLng`
+
+Represents a geographical point with latitude and longitude coordinates.
+
+```dart
+LatLng(double lat, double lng)
+```
+
+### Example
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_map_gl/flutter_map_gl.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MapScreen(),
+    );
+  }
+}
+
+class MapScreen extends StatefulWidget {
+  @override
+  _MapScreenState createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  final MapController _controller = MapController();
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Flutter Map GL Example')),
+      body: FlutterMapGL(
+        options: MapOptions(
+          center: LatLng(51.509865, -0.118092), // London
+          style: 'https://your-map-server.com/style',
+          zoom: 13.0,
+          bearing: 0.0,
+          pitch: 0.0,
+        ),
+        controller: _controller,
+        onMapCreated: () {
+          print('Map is ready');
+        },
+        onMapClick: (latLng) {
+          print('Clicked at: $latLng');
+        },
+        onCameraMove: (position, zoom) {
+          print('Camera moved to: $position with zoom: $zoom');
+        },
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () => _controller.setZoom((_controller.zoom ?? 10) + 1),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            child: Icon(Icons.remove),
+            onPressed: () => _controller.setZoom((_controller.zoom ?? 10) - 1),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
