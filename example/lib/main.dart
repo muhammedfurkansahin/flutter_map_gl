@@ -6,16 +6,20 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Flutter Map GL Örneği', theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true), home: const MapScreen());
+    return MaterialApp(
+      title: 'Flutter Map GL Örneği',
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+      home: const MapScreen(),
+    );
   }
 }
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({Key? key}) : super(key: key);
+  const MapScreen({super.key});
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -25,7 +29,8 @@ class _MapScreenState extends State<MapScreen> {
   final MapController _controller = MapController();
 
   // Klokantech temel harita URL'i ve parametreleri
-  final String _mapUrl = "https://inovision.tech/styles/klokantech-basic/#16.96/37.872351/32.492013/-36.9/60";
+  final String _mapUrl =
+      "url";
   late MapOptions _mapOptions;
 
   @override
@@ -59,10 +64,10 @@ class _MapScreenState extends State<MapScreen> {
               options: _mapOptions,
               controller: _controller,
               onMapCreated: () {
-                print('Harita oluşturuldu!');
+                debugPrint('Harita oluşturuldu!');
               },
               onMapClick: (latLng) {
-                print('Haritada tıklandı: $latLng');
+                debugPrint('Haritada tıklandı: $latLng');
               },
             ),
           ),

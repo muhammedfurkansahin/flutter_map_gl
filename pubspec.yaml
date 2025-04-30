@@ -1,20 +1,15 @@
 name: flutter_map_gl
 description: "Flutter paketi ile mobil uygulamalarda (iOS ve Android) haritaları kullanmanıza olanak tanıyan bir paket."
-version: 0.1.0
+version: 0.1.2
 homepage: https://github.com/muhammedfurkansahin/flutter_map_gl
 repository: https://github.com/muhammedfurkansahin/flutter_map_gl
 issue_tracker: https://github.com/muhammedfurkansahin/flutter_map_gl/issues
 documentation: https://github.com/muhammedfurkansahin/flutter_map_gl/blob/main/README.md
 
-
-flutter:
-  plugin:
-    platforms:
-      android:
-        default_package: flutter_map_gl
-      ios:
-        default_package: flutter_map_gl
-        
+# Sadece iOS ve Android platformlarını desteklediğini belirtir
+platforms:
+  android: 
+  ios:
 
 environment:
   sdk: ^3.7.2
@@ -37,6 +32,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter:
 
   # To add assets to your package, add an assets section, like this:
   # assets:

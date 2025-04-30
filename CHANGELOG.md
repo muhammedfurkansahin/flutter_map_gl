@@ -1,3 +1,10 @@
+## 0.1.2
+* Dinamik URL yapısı desteği eklendi - artık #zoom/lat/lng/bearing/tilt gibi parametreler isteğe bağlı
+* Harita URL'sinde parametrelerin sırasını özelleştirme imkanı eklendi
+* Kamera kontrolü için gelişmiş özellikler (tilt, bearing) eklendi
+* Kullanıcı yönünü takip etme özelliği eklendi
+* MapController'a yeni özellikler ve metodlar eklendi
+
 ## 0.1.1
 * yaml update
 
